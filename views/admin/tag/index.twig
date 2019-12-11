@@ -1,0 +1,59 @@
+{% extends 'admin/layouts/layout.twig' %}
+
+{% block body %}
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
+            <!-- ============================================================== -->
+            <!-- pageheader  -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-header">
+                        <h2 class="pageheader-title">Tags </h2>
+                        <div class="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Tags</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right">
+                <a href="/admin/tag-create" class="btn btn-success btn-sm">New*</a>
+            </div>
+            <hr>
+            <div class="ecommerce-widget">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tags</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set id = 0 %}
+                        {% for tag in tags %}
+                            {% set id = id+1 %}
+                        <tr>
+                            <td>{{ id }}</td>
+                            <td>{{ tag.tag }}</td>
+                            <td>
+                                <div class="btn btn-group pull-right">
+                                    <a href="/admin/tag-delete/{{ tag.id }}" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="/admin/tag-edit/{{ tag.id }}" class="btn btn-sm btn-info">Edit</a>
+                                    <a href="#" class="btn btn-sm btn-success">View</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
