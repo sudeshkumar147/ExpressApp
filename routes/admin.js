@@ -6,7 +6,8 @@ const RegisterController = require('../app/Controller/Admin/Auth/RegisterControl
 const DashboardController = require('../app/Controller/Admin/DashboardController');
 const TagController = require('../app/Controller/Admin/TagController');
 
-router.get('/', LoginController.index);
+router.get('/', DashboardController.index);
+router.get('/login', LoginController.index);
 
 router.get('/register', RegisterController.index);
 
