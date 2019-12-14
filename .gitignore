@@ -5,3 +5,5 @@ ExpressApp.iml
 package-lock.json
 public/html
 yarn-error.log
+.env
+sessions

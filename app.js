@@ -3,6 +3,11 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const uuid = require('uuid/v4')
+const session = require('express-session');
+const flash = require('req-flash');
+const FileStore = require('session-file-store')(session);
+const dotenv = require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -17,7 +22,29 @@ app.set('view engine', 'twig');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('dsdjkdhkhhjk'));
+
+app.use(session({
+  genid: (req) => {
+    console.log(req.sessionID);
+    return uuid()
+  },
+  store: new FileStore(),
+  secret: 'dskdjkdd',
+  saveUninitialized:true,
+  resave:false,
+  cookie: {
+    maxAge: 60000
+  }
+}));
+app.use(flash());
+
+app.use(function(req, res, next){
+  res.locals.success_messages = req.flash('successMessage');
+  res.locals.error_messages = req.flash('errorMessage');
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
