@@ -6,11 +6,6 @@ exports.index = (req,res)=>{
 };
 
 exports.store = (req,res)=>{
-    const { title,slug,image,tag,body } = req.body;
-
-
-};
-exports.store = (req,res)=>{
     const {title,slug,image,tag,body} = req.body;
 
     const post = new Post({
@@ -42,13 +37,3 @@ exports.delete = (req,res)=>{
     const post = Post.findByIdAndRemove(req.body.id);
     res.redirect('/admin/post');
 };
-
-
-
-
-}
-exports.delete = (req,res)=>{
-    const post = Post.findByIdAndRemove(req.body.id);
-    res.redirect('/admin/post');
-}
-
