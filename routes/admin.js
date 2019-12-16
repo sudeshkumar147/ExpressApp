@@ -7,7 +7,7 @@ const DashboardController = require('../app/Controller/Admin/DashboardController
 const TagController = require('../app/Controller/Admin/TagController');
 const MenuController = require('../app/Controller/Admin/MenuController');
 const CategoryController = require('../app/Controller/Admin/CategoryController');
-
+const MapController = require('../app/Controller/Admin/MapController');
 router.get('/', DashboardController.index);
 router.get('/login', LoginController.index);
 
@@ -41,5 +41,7 @@ router.get('/category',CategoryController.index);
 
 router.post('/category-save',CategoryController.store);
 
+router.get('/map',MapController.index);
+router.post('/map-save',MapController.store);
 
 module.exports = router;
