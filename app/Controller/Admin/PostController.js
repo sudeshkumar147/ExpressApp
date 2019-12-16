@@ -6,11 +6,6 @@ exports.index = (req,res)=>{
 };
 
 exports.store = (req,res)=>{
-    const { title,slug,image,tag,body } = req.body;
-
-
-};
-exports.store = (req,res)=>{
     const {title,slug,image,tag,body} = req.body;
 
     const post = new Post({
@@ -21,7 +16,7 @@ exports.store = (req,res)=>{
         body:body,
     });
     post.save().then(result=>{
-       console.log('Post Added');
+        console.log('Post Added');
     }).catch(err =>{
         console.log('something went wrong,try again');
     });
@@ -42,13 +37,3 @@ exports.delete = (req,res)=>{
     const post = Post.findByIdAndRemove(req.body.id);
     res.redirect('/admin/post');
 };
-
-
-
-
-}
-exports.delete = (req,res)=>{
-    const post = Post.findByIdAndRemove(req.body.id);
-    res.redirect('/admin/post');
-}
-
