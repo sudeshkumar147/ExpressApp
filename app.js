@@ -32,6 +32,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('dsdjkdhkhhjk'));
 
+app.use(function (req, res, next) {
+  res.locals.url = process.env.HOST;
+  next();
+});
+
 app.use(session({
   genid: (req) => {
     console.log(req.sessionID);
