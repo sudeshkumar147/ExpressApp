@@ -9,6 +9,7 @@ const flash = require('req-flash');
 const FileStore = require('session-file-store')(session);
 const dotenv = require('dotenv').config();
 const helmet = require('helmet');
+const fileUpload = require('express-fileupload');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -21,6 +22,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'twig');
 
 app.use(helmet());
+
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
