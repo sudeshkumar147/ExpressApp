@@ -15,4 +15,12 @@ exports.store = (req,res) => {
     })
 
     res.redirect('/');
-}
+};
+
+exports.destroy = async (req,res) => {
+	await NewsLetter.findByIdAndRemove(req.params.id).then(response => {
+		console.log('NewsletterDeleted');
+	}).catch(error => {
+		console.log('something went wrong');
+	});
+};
