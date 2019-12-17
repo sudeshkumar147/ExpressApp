@@ -1,0 +1,47 @@
+{% extends 'admin/layouts/layout.twig' %}
+
+{% block body %}
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-header">
+                        <h2 class="pageheader-title">Role </h2>
+                        <div class="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Role</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ecommerce-widget">
+                <form action="/admin/role-save" method="post">
+                    <div class="form-group">
+                        <label>User Id</label>
+                        <input type="text" name="user_id" placeholder="Select user" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Role Id</label>
+                        <input type="text" name="role_id" placeholder="Select Role" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Menu id</label>
+                        <input type="text" name="menu_id" placeholder="Select Menu" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Permission</label>
+                        <input type="text" name="permission" placeholder="permission" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" value="Submit" class="btn btn-success btn-sm">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
