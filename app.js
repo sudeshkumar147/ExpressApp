@@ -25,6 +25,10 @@ app.use(helmet());
 
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 },
+  useTempFiles : true,
+  tempFileDir : '/tmp/',
+  safeFileNames: true,
+  preserveExtension: true
 }));
 
 app.use(logger('dev'));

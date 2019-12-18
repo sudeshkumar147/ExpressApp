@@ -1,29 +1,51 @@
 const Post = require('../../Model/Post');
 
 exports.index = (req,res)=>{
-    res.render('admin/post/index');
+
+    Post.find().limit(10).then(result => {
+
+        res.render('admin/post/index',{
+            posts:result,
+        });
+
+    });
+
+};
+
+exports.create = (req, res) => {
+    res.render('admin/post/create');
+
+};
+
+exports.edit = (req, res) => {
+
 
 };
 
 exports.store = (req,res)=>{
-    const {title,slug,image,tag,body} = req.body;
 
-    let file = req.files.image;
+    const {title,slug,tag,body} = req.body;
 
+    let file = req.files;
+    let file_name = 'primary_file_name';
     if (file) {
-        file.mv('/somewhere/on/your/server/image.jpg', function(err) {
+        file.image.mv('public/storage/'+file.image.md5+'.'+file.image.mimetype.split('/')[1], function(err) {
             if (err) {
-                return res.status(500).send(err);
+                console.log(err);
+                 file_name = 'fine_not_uploaded';
             }else{
-                res.send('File uploaded!');
+                console.log('ok');
+                file_name = 'file_uploaded_path';
             }
         });
+    }else{
+        file_name = 'file_not_matched_name';
     }
 
     const post = new Post({
         title:title,
         slug:slug,
-        image:image,
+        image:file_name,
         tag:tag,
         body:body,
     });
@@ -33,6 +55,7 @@ exports.store = (req,res)=>{
     }).catch(err =>{
         console.log('something went wrong,try again');
     });
+
     res.redirect('/admin/post');
 
 };
@@ -46,7 +69,7 @@ exports.show = (req,res)=>{
     });
 
 };
-exports.delete = (req,res)=>{
-    const post = Post.findByIdAndRemove(req.body.id);
+exports.destroy = async (req,res)=>{
+    const post = await Post.findByIdAndRemove(req.params.id);
     res.redirect('/admin/post');
 };
