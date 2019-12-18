@@ -7,3 +7,4 @@ public/html
 yarn-error.log
 .env
 sessions
+public/storage
