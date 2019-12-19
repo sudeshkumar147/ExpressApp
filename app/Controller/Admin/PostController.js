@@ -27,19 +27,18 @@ exports.store = (req,res)=>{
     const {title,slug,tag,body} = req.body;
 
     let file = req.files;
-    let file_name = 'primary_file_name';
+    let file_name = '';
     if (file) {
-        file.image.mv('public/storage/'+file.image.md5+'.'+file.image.mimetype.split('/')[1], function(err) {
+        file_name = file.image.md5+'.'+file.image.mimetype.split('/')[1];
+        file.image.mv('public/storage/'+file_name, function(err) {
             if (err) {
                 console.log(err);
-                 file_name = 'fine_not_uploaded';
+                 // file_name = 'fine_not_uploaded';
             }else{
                 console.log('ok');
-                file_name = 'file_uploaded_path';
+                // file_name = 'file_uploaded_path';
             }
         });
-    }else{
-        file_name = 'file_not_matched_name';
     }
 
     const post = new Post({
